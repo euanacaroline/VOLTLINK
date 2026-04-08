@@ -45,10 +45,22 @@ def tela_cadastro():
             break 
     
     while True:
-        senha = input("Crie uma senha: ").strip()
+        senha = input("Crie uma senha (4-8 caracteres, 1 numero, 1 maiuscula): ").strip()
+        if not (4 <= len(senha) <= 8):
+            print("Erro: A senha deve ter entre 4 a 8 caraceres.")
+            continue
+        if not any(char.isdigit() for char in senha):
+            print("Erro: A senha deve conter pelo menos um número.")
+            continue 
+        if not any(char.isupper() for char in senha):
+            print("Erro: A senha deve conter pelo menos uma letra maiúscula. ")
+            continue
+
+    
         confirmacao = input("Confirme sua senha: ").strip()
         if senha == confirmacao:
             senha_cadastrada = senha
+            usuarios_existentes.append(email_cadastrado)
             print("Senha validada e cadastrada!")
             break
         else:
